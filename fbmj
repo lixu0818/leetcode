@@ -1,0 +1,90 @@
+数组原地搬0，不要求非0元素的顺序，要求写操作最少，以及最少的upper bound
+细节挺多的，也挺有意思，总有没有的想过的地方
+
+上周五面的，打电话 + codepair。话说facebook 是坚决不用hangout 这类电话视频么？。。。。
+
+一个小哥， 听口语应该是本地人。。。上来介绍下自己， 然后也没问具体简历上的projects, 白准备了（我可能面了个假试？）。。。
+因为面的是android职位， 所以问了一个 “你认为android core api，哪些是没完成 或者 不合理的？” 真心没遇到过这种问题， 所以当场懵逼。。。想了半天也不知道该说啥，然后我就说要不然你提一个， 看我知不知道。 他就说fragment，幸好我之前工作时 和 同事有过一个关于fragment的讨论。 就说了说哪些地方 感觉不太合理， 哪些地方感觉和doc说的不一致， 最后说了句 个人觉得， 能用actvity 就绝不用fragment。 他说了句 good answer 就结束话题了。
+
+然后就是做题， 第一题是 read4line 那道，心中窃喜， 正好是前两天才做过。装模做样的问了问constraint， 先介绍 想法， 然后coding。 写完之后， manual walk through 了几个case。 在小哥的提醒下， 发现一个小bug，index out of bound。 然后迅速改正。 
+第二题 好像叫 sequencial scheduler 之类的， 给了 一个 Runable 的 interface， 然后给了一个 scheduler 的 post 方法。 这个post 是 平行的， 举例：
+方法的header ：   public void post(Runable r){};
+连续调用 post 5 次：. more info on 1point3acres.com
+scheduler.post(r1);
+scheduler.post(r2);
+scheduler.post(r3);
+scheduler.post(r4);. 1point 3acres 璁哄潧
+scheduler.post(r5);
+
+这5个runable 会配给5个线程， 同时运行。 然后要求： 怎么实现 这5个任务 一个接一个的运行， 就是那个sequencial 的意思。
+
+可能是我做题少， 真没看到过这题。 而且到第二题的时候， 只剩下5分钟了。 就又进入懵逼状态， 还好小哥说就讲讲思路就行。 我想了想说 key point 应该是如何得知上一个任务什么时候结束， 如果知道了就可以实现 one by one了。 小哥说对， 这是hard part。 我说  要不 implement runnable interface ， 加入一个listener， 用来监听自己什么时候结束， 然后发送envent 到scheduler ， 这样scheduler 就能轻松实现 1by1. 小哥说这是个思路， 我又说或许可以借用 hanlder 和messager的通信模式， 但是因为时间关系， 我不确定行不行。 然后就结束了。
+-google 1point3acres
+
+当天没收到回信， 以为跪了。结果今天（周二）收到猎头回信， 说要跟我说下onsite 的流程。
+
+PS： 关于第二道题， 我不知道我表述的清不清楚， 因为我真心当时懵逼的不要不要的了。 结束后又想了想这道题， 实在不知道考点是什么。 感觉是个设计题， 但又好像不一样。 感觉我的回答很烂。 不过还好从结果来看 这题似乎没扣多少分。
+
+
+
+市场上有卖一盒6块蛋糕，一盒9块，一盒20块的，这里是块数不是费用，给你一个数字，问能不能买成蛋糕. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+不能散装卖，比如要买26块蛋糕，可以买两盒，一盒6块一盒20块，但是买27块就不行，凑不了.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+磕磕碰碰把代码写完并稍微优化一下跑一下testcase 就38分钟了 所以只面了一题.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+
+就是背包问题的简化版，建立一个数组，每一格都对块数的数组进行一次扫描， . 鍥磋鎴戜滑@1point 3 acres
+dp[0]=1;
+for(int i=1;i<=target;i++)
+for(int j=0;j<nums.size();j++). 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
+if(dp[i - nums[j]] == 1) {dp=1;break} 差不多就是这样吧...
+
+补充内容 (2017-3-17 05:29):
+时间复杂度 O（m*n）
+如果不能重复利用的话两个loop需要交换位置，并且dp数组需要反向扫描
+
+
+刚刚面完的，就问一道题。题目有点奇怪。implement circular queue,给了一个class：class CircularQueue{.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+public:. visit 1point3acres.com for more.
+      CircularQueue(int maxSize);-google 1point3acres
+      int enqueue(vector<char>& buf);
+      vector<char> dequeue(int bytes);
+private：. visit 1point3acres.com for more.
+      //这里自己实现那些方法，定义一些量
+}.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+就是实现这几个方法。例子：
+maxSize(5)  //限定Size为5  queue 是这样的：[- - - - -]
+enqueue({a,b,c})   //queue 成了这样：［a b c - - ], return 3
+enqueue({d,e,f})   //queue 成了这样:    [a b c d e], return 2
+dequeue(3)           //queue 成了这样：  [- - - d e], return {a,b,c}-google 1point3acres
+enqueue({g,h})     //queue 成了这样：  [g h - d e], return 2
+dequeue(3)           //queue 成了这样：  [- h - - -], return {d,e,g}. 1point 3acres 璁哄潧
+用最简单的方法写了，然后要求优化，就是用memcopy(没用过这个函数，用伪代码了)这样的函数整段复制，要考虑的情况有些多，出了几个bug。。。
+题目不难但自己发挥的并不好，感觉怪怪的，这样的面试是不是有点非常规啊？
+
+
+第一轮：两道 LC原题 
+   1) valid Palindrome. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+   2) reverse words in a string 
+
+第二轮： 一道面经题
+  sum of submatrix (m x n)
+   1) brute force, O(mn) method. more info on 1point3acres.com
+   2) O(1) method. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+. Waral 鍗氬鏈夋洿澶氭枃绔�,
+---------------吐槽分割线---------------
+记得面试官说FB家的culture是move fast,,,告诉我few days up to 1 week能收到结果(well,,,,我信了). From 1point 3acres bbs
+事实证明太天真。。过了漫长的6个工作日+2个周末，望眼欲穿的我木有等来任何Update,,,(想说。。宝宝其实心里苦）. From 1point 3acres bbs
+麻木中打算move on前，回报地里，把面经贡献出来，如果能收获一点米就更好了，谢谢大家，祝16年offer多多
+
+
+
+补充内容 (2016-2-29 14:31):
+第二题比如给的interface是,,, int sumOfSubMatrix( int[][] mat, int leftTop, int rightBot)， arg#1是已知的矩阵，arg#2和arg#3是用来确定需要求和的子矩阵位置；
+(题目没有给出 k, 至少问我的没有..）
+
+补充内容 (2016-2-29 14:34):
+姨？ 怎么leftTop和rightBot的[]方块 没了咩。。。anyway, 之前想举例的是用一个(int,int) pair object表示leftTop和rightBot; 或者可以更直接点用(int x1, int y1, int x2, int y2) -> leftTop(x1,y1),,,
+
+
+国人姐姐，上来讨论项目两道题，打印树path，string乘法。 鏉ユ簮涓€浜�.涓夊垎鍦拌鍧�. 
+题本身不难，大脑短路，复杂度回答的不太好，最后一题没让写完。。
+目测是跪了
