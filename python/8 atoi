@@ -1,0 +1,83 @@
+Name	Width	Range
+long	64	–9,223,372,036,854,775,808 to 9 ,223,372,036,854,775,807
+int	32	–2,147,483,648 to 2,147,483,647
+short	16	– 32,768 to 32,767
+byte	8	– 128 to 127
+
+#8 atoi
+
+class Solution(object):
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        if len(str)==0:
+            return 0
+            
+        sign = 0
+        result =0
+        foundDigit = False
+        for i in range(len(str)):
+            if str[i] == ' ' and foundDigit==False:
+                continue
+            
+            if str[i] not in '1234567890':
+                
+                if str[i] in '+-' and sign ==0:
+                    if str[i] == '+':
+                        sign =1
+                        foundDigit = True
+                        continue
+                    if str[i]=='-':
+                        sign =-1
+                        foundDigit = True
+                        continue
+                    
+                else:
+                    break
+            else:
+                foundDigit = True
+                result = result*10 + int(str[i])
+                
+        if sign ==-1:
+            result = result *-1
+        if result > 2147483647:
+            return 2147483647
+        if result < -2147483648:
+            return -2147483648
+        
+        return result
+
+        if elif  ==> if continue if
+
+    def myAtoi(self, str):
+        
+        s = str.strip()
+        if len(s)==0:
+            return 0
+        sign =1  
+        result =0
+        cnt=0
+        for i in range(len(s)):
+            if s[i] =='+':
+                sign =1
+                cnt +=1
+                
+            elif s[i] =='-':
+                sign =-1
+                cnt +=1
+                
+            elif not s[i] in '0123456789' or cnt>1:
+                break
+            else:
+                result = result*10 + '0123456789'.index(s[i])
+        
+        result = result*sign
+        
+        if result > 2147483647:
+            return 2147483647
+        if result < -2147483648:
+            return -2147483648
+            
+        return result
