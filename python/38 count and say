@@ -1,0 +1,28 @@
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+       
+        if n <=1:
+            return "1"
+            
+        if n ==2:
+            return "11"
+        
+        result = ""
+        s = self.countAndSay (n-1)
+        count = 1
+        cur = s[0]
+        for i in range (1, len(s)):
+            
+            
+            if s[i]==cur:
+                count +=1
+            else:
+                result += str(count)+str(cur)
+                count =1
+                cur = s[i]
+                
+        result += str(count)+str(cur)
+        return result

@@ -1,0 +1,33 @@
+#20 valid parentheses
+
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if len(s)==0:
+            return True
+        
+        stack = []
+        for i in range(len(s)):
+            if s[i] in '([{':
+                stack.append(s[i])
+                
+            elif len(stack)==0:
+                return False
+            else:
+                curLeft = stack[-1]
+                stack = stack[:-1]
+                if not (curLeft == '(' and s[i] == ')' or curLeft == '[' and s[i] == ']' or curLeft == '{' and s[i] == '}'):
+                    return False
+                     
+        if len(stack)==0:
+            return True
+        else:
+            return False
+
+            ##############
+            ##conditional 
+
+            return True if len(stack)==0 else False
+            result = True if len(stack)==0 else False
