@@ -1,0 +1,74 @@
+102 Binary Tree Level Order Traversal
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        r =[]
+        self.DFT(root, r, 1)
+        return r
+        
+    def DFT(self, root, r, level):
+        if root is not None:
+            if len(r)< level:
+                r.append([])
+            r[level-1].append(root.val)
+            self.BFT(root.left, r, level+1)
+            self.BFT(root.right, r, level+1)
+
+
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if root is None:
+            return []
+        nl =[[root.val]]
+        q=[root]
+        while q:
+            levelNode =[]
+            for i in range(len(nl[-1])):
+                node = q.pop()
+                if node.left:
+                    levelNode.append(node.left.val)
+                    q.insert(0, node.left)
+                if node.right:
+                    levelNode.append(node.right.val)
+                    q.insert(0, node.right)
+            if levelNode:
+                nl.append(levelNode)
+            
+        return nl 
+
+
+class Solution(object):
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        r =[]
+        self.DFT(root, r, 1)
+        for i in range(1,len(r)):
+            if i%2:
+                r[i].reverse()
+        return r
+        
+    def DFT(self, root, r, level):
+        if root is not None:
+            if len(r)< level:
+                r.append([])
+            r[level-1].append(root.val)
+            self.DFT(root.left, r, level+1)
+            self.DFT(root.right, r, level+1)

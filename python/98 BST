@@ -1,0 +1,75 @@
+    98 BST
+##add parameter to save minMax
+    def isValidBST(self, root, bottom = float('-inf'), top = float('inf')):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if root is None:
+            return True
+        if root.val <= bottom or root.val>= top:
+            return False
+        return self.isValidBST(root.left, bottom, root.val) and self.isValidBST(root.right, root.val, top)
+
+    class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if root is None:
+            return Truetop
+            
+        min, max, valid = self.minMaxValidBST(root)
+        return valid
+        
+    def minMaxValidBST(self, root):
+        if root.left is None and root.right is None:
+            return root.val, root.val, True
+        elif root.right is None:
+            minl, maxl, validl = self.minMaxValidBST(root.left)
+            if validl is False or root.val<=maxl:
+                return 0, 0, False
+            else:
+                return minl, root.val, True
+        elif root.left is None:
+            minr, maxr, validr = self.minMaxValidBST(root.right)
+            if validr is False or root.val>=minr:
+                return 0, 0, False
+            else:
+                return root.val, maxr, True
+        else:
+            minl, maxl, validl = self.minMaxValidBST(root.left)
+            minr, maxr, validr = self.minMaxValidBST(root.right)
+            if validl is False or validr is False or root.val<=maxl or root.val>=minr:
+                return 0, 0, False
+            else:
+                return minl, maxr, True
+
+
+#inOrder traverse
+
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if root is None:
+            return True
+        l = []
+        self.inOrder(root, l)
+        
+        if len(l)<=1:
+            return True
+        for i in range(len(l)-1):
+            if l[i]>=l[i+1]:
+                return False
+        return True
+
+            
+    def inOrder(self, root, l):
+        if root is not None:
+            self.inOrder(root.left, l)
+            l.append(root.val)
+            self.inOrder(root.right, l)

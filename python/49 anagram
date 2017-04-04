@@ -1,0 +1,46 @@
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        if strs is None or len(strs)<=1:
+            return [strs]
+        
+        anagrams = []
+        for i in range(len(strs)):
+            chars=[]
+            for char in strs[i]:
+                chars.append(char)
+                chars.sort()
+            anagrams.append("".join(chars))
+        
+        indices = sorted(range(len(anagrams)), key=lambda x:anagrams[x])
+        
+        result = [[strs[indices[0]]]]
+        for i in range(1, len(strs)):
+            if anagrams[indices[i]] == anagrams[indices[i-1]]:
+                result[-1].append(strs[indices[i]])
+            else:
+                result.append([strs[indices[i]]])
+        return result 
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        if strs is None or len(strs)<=1:
+            return [strs]
+        
+        dict ={}
+        for word in strs:
+            anagram = "".join(sorted(word))
+            if anagram in dict:
+                dict[anagram].append(word)
+            else:
+                dict[anagram] = [word]
+        
+        
+        return [dict[anagram] for anagram in dict]    

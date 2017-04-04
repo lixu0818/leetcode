@@ -1,0 +1,59 @@
+
+    125 huiwen
+
+    import re
+
+    s1=re.sub('[^A-Za-z0-9]+', '', s).lower()
+
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        
+        if len(s)<=1:
+            return True
+            
+        i=0
+        j=len(s)-1
+        s= s.upper()
+        while i<j:
+            while not s[i].isalnum():
+                i+=1
+                if i == len(s):
+                    return True
+            while not s[j].isalnum():
+                j-=1
+            if s[i]!=s[j]:
+                return False
+            i+=1
+            j-=1
+                
+            
+        return True
+
+
+        TEL
+
+
+        temp =""
+        for i in range (len(s)):
+            if ord(s[i])>= ord('A') and ord(s[i])<= ord('Z'):
+                temp += chr(ord(s[i])-ord('A')+ord('a'))
+            elif ord(s[i])>= ord('a') and ord(s[i])<= ord('z') or ord(s[i])>= ord('0') and ord(s[i])<= ord('9') :
+                temp += s[i]
+        
+        if len(temp)<=1:
+            return True
+            
+        i=0
+        j=len(temp)-1
+        
+        while i<j:
+            if temp[i]==temp[j]:
+                i+=1
+                j-=1
+            else:
+                return False
+        return True

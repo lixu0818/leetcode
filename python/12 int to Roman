@@ -1,0 +1,47 @@
+12 int to Roman
+
+I（1）、V（5）、X（10）、L（50）、C（100）、D（500）和M（1000）
+
+class Solution(object):
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        a= num/1000
+        num=num%1000
+        b= num/100
+        num=num%100
+        c= num/10
+        d=num%10
+        
+        r =""
+        r +="M"*a
+        if b==9:
+            r +="CM"
+        elif b >=5:
+            r = r+"D"+"C"*(b-5)
+        elif b==4:
+            r+="CD"
+        elif b<=3:
+            r+="C"*b
+        
+        if c==9:
+            r += "XC"
+        elif c >=5:
+            r = r+"L"+"X"*(c-5)
+        elif c==4:
+            r+="XL"
+        elif c<=3:
+            r+="X"*c
+            
+        if d ==9:
+            r += "IX"
+        elif d >=5:
+            r = r+"V"+"I"*(d-5)
+        elif d==4:
+            r+="IV"
+        elif d<=3:
+            r+="I"*d
+        
+        return r

@@ -1,0 +1,19 @@
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if nums is None or len(nums) == 0:
+            return []
+        if len(nums)==1:
+            return [nums]
+        
+        currentp=[]
+        lastp = self.permute(nums[1:])
+        for p in lastp:
+            for i in range(len(nums)):
+                pc = p[:]
+                pc.insert(i,nums[0])
+                currentp.append(pc)
+        return currentp
