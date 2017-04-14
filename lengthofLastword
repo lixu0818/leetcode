@@ -1,0 +1,26 @@
+class Solution(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        s = s.strip()
+        s=s[::-1]
+        spaceIndex = s.find(' ')
+        if spaceIndex < 0:
+            return len(s)
+        else:
+            return spaceIndex
+class Solution(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        s = s.strip()
+        words = s.split()
+        if words:
+            return len(words[-1])
+        else:
+            return 0
+        

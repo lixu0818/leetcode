@@ -1,0 +1,41 @@
+class Solution(object):
+    def compareVersion(self, version1, version2):
+        """
+        :type version1: str
+        :type version2: str
+        :rtype: int
+        """
+        # v1n = []
+        # while version1.find('.')>0:
+        #     i = version1.find('.')
+        #     v1n.append( version1[:i] )
+        #     version1=version1[i+1:]
+        # v1n.append(version1)
+
+        # v2n = []
+        # while version2.find('.')>0:
+        #     i = version2.find('.')
+        #     v2n.append( version2[:i] )
+        #     version2=version2[i+1:]
+        # v2n.append(version2)
+        
+        v1n=version1.split('.')
+        v2n=version2.split('.')
+        v1n =[int(x) for x in v1n]
+        v2n =[int(x) for x in v2n]
+
+        for i in range(min(len(v1n), len(v2n))):
+            if v1n[i]>v2n[i]:
+                return 1
+            elif v1n[i]<v2n[i]:
+                return -1
+                
+        for i in range(min(len(v1n), len(v2n)), len(v1n)):
+            if v1n[i]!= 0:
+                return 1
+                
+        for i in range(min(len(v1n), len(v2n)), len(v2n)):
+            if v2n[i]!= 0:
+                return -1
+                
+        return 0

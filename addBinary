@@ -1,0 +1,35 @@
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        
+        a10 = 0
+        for i in a:
+            a10 = a10*2 + int(i)
+        b10=0
+        for i in b:
+            b10 = b10*2 +int(i)
+            
+        sum = a10+b10
+        if sum ==0:
+            return "0"
+        
+        res =""
+        while sum>=2:
+            res+=str(sum%2)
+            sum = sum/2
+        res+=str(sum)
+        return res[::-1]
+
+class Solution(object):
+    def addBinary(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: str
+        """
+        
+        return bin(int(a, 2) + int(b, 2))[2:]

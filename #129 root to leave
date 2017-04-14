@@ -1,0 +1,60 @@
+#129 root to leave
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def sumNumbers(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root is None:
+            return 0
+            
+        if root.left is None and root.right is None:
+            return root.val
+        
+        result = []
+        self.dewdrop(root, root.val, result)
+        sum=0
+        for i in result:
+            sum +=i
+        return sum
+            
+    def dewdrop(self, root, dew, result):
+        if root.left is None and root.right is None:
+            result.append(dew)
+        elif root.left is None:
+            self.dewdrop(root.right, dew*10+root.right.val, result)
+        elif root.right is None:
+            self.dewdrop(root.left, dew*10+root.left.val, result)
+        else:
+            self.dewdrop(root.right, dew*10+root.right.val, result)
+            self.dewdrop(root.left, dew*10+root.left.val, result)
+
+class Solution(object):
+    def sumNumbers(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root is None:
+            return 0
+            
+        return self.dewdrop(root, root.val)
+
+    def dewdrop(self, root, dew):
+        if root.left is None and root.right is None:
+            return dew
+        elif root.left is None:
+            return self.dewdrop(root.right, dew*10+root.right.val)
+        elif root.right is None:
+            return self.dewdrop(root.left, dew*10+root.left.val)
+        else:
+            return self.dewdrop(root.right, dew*10+root.right.val)+self.dewdrop(root.left, dew*10+root.left.val)
+            
